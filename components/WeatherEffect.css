@@ -1,0 +1,311 @@
+.weather-effect-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+
+/* ============================================
+   REGEN - Authentischer Regeneffekt
+   ============================================ */
+.rain .drop {
+  position: absolute;
+  bottom: 100%;
+  width: 1px;
+  height: 0;
+  pointer-events: none;
+  background: transparent;
+  animation: realistic-rain linear infinite;
+  opacity: 0;
+}
+
+@keyframes realistic-rain {
+  0% {
+    transform: translateY(0vh);
+    opacity: 0;
+    height: 0;
+  }
+  10% {
+    opacity: 0.6;
+    height: 80px;
+  }
+  90% {
+    opacity: 0.3;
+    height: 80px;
+  }
+  100% {
+    transform: translateY(110vh);
+    opacity: 0;
+    height: 0;
+  }
+}
+
+/* Realistische Regentropfen-Verteilung */
+.rain .drop {
+  background: linear-gradient(to bottom, 
+    rgba(255, 255, 255, 0) 0%, 
+    rgba(174, 194, 224, 0.5) 20%, 
+    rgba(174, 194, 224, 0.3) 100%
+  );
+}
+
+/* Verschiedene Geschwindigkeiten und Positionen */
+.rain .drop:nth-child(15n+1) { left: 3%; animation-duration: 0.7s; animation-delay: 0s; }
+.rain .drop:nth-child(15n+2) { left: 10%; animation-duration: 0.65s; animation-delay: 0.1s; }
+.rain .drop:nth-child(15n+3) { left: 17%; animation-duration: 0.8s; animation-delay: 0.2s; }
+.rain .drop:nth-child(15n+4) { left: 24%; animation-duration: 0.75s; animation-delay: 0.15s; }
+.rain .drop:nth-child(15n+5) { left: 31%; animation-duration: 0.7s; animation-delay: 0.3s; }
+.rain .drop:nth-child(15n+6) { left: 38%; animation-duration: 0.85s; animation-delay: 0.05s; }
+.rain .drop:nth-child(15n+7) { left: 45%; animation-duration: 0.68s; animation-delay: 0.25s; }
+.rain .drop:nth-child(15n+8) { left: 52%; animation-duration: 0.78s; animation-delay: 0.12s; }
+.rain .drop:nth-child(15n+9) { left: 59%; animation-duration: 0.72s; animation-delay: 0.18s; }
+.rain .drop:nth-child(15n+10) { left: 66%; animation-duration: 0.75s; animation-delay: 0.22s; }
+.rain .drop:nth-child(15n+11) { left: 73%; animation-duration: 0.7s; animation-delay: 0.08s; }
+.rain .drop:nth-child(15n+12) { left: 80%; animation-duration: 0.82s; animation-delay: 0.28s; }
+.rain .drop:nth-child(15n+13) { left: 87%; animation-duration: 0.73s; animation-delay: 0.14s; }
+.rain .drop:nth-child(15n+14) { left: 94%; animation-duration: 0.77s; animation-delay: 0.19s; }
+.rain .drop:nth-child(15n+15) { left: 6%; animation-duration: 0.71s; animation-delay: 0.24s; }
+
+/* ============================================
+   SCHNEE - Sanft fallende Schneeflocken
+   ============================================ */
+.snow .flake {
+  position: absolute;
+  top: -10%;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: realistic-snow linear infinite;
+  box-shadow: 0 0 3px rgba(255, 255, 255, 0.5);
+}
+
+@keyframes realistic-snow {
+  0% {
+    transform: translateY(0vh) translateX(0vw) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(110vh) translateX(50px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Verschiedene Größen und Geschwindigkeiten für Schneeflocken */
+.snow .flake:nth-child(10n+1) { left: 5%; width: 3px; height: 3px; animation-duration: 12s; animation-delay: 0s; }
+.snow .flake:nth-child(10n+2) { left: 15%; width: 5px; height: 5px; animation-duration: 15s; animation-delay: 2s; }
+.snow .flake:nth-child(10n+3) { left: 25%; width: 4px; height: 4px; animation-duration: 10s; animation-delay: 4s; }
+.snow .flake:nth-child(10n+4) { left: 35%; width: 6px; height: 6px; animation-duration: 18s; animation-delay: 1s; }
+.snow .flake:nth-child(10n+5) { left: 45%; width: 3px; height: 3px; animation-duration: 13s; animation-delay: 5s; }
+.snow .flake:nth-child(10n+6) { left: 55%; width: 5px; height: 5px; animation-duration: 14s; animation-delay: 3s; }
+.snow .flake:nth-child(10n+7) { left: 65%; width: 4px; height: 4px; animation-duration: 16s; animation-delay: 6s; }
+.snow .flake:nth-child(10n+8) { left: 75%; width: 6px; height: 6px; animation-duration: 11s; animation-delay: 2.5s; }
+.snow .flake:nth-child(10n+9) { left: 85%; width: 3px; height: 3px; animation-duration: 17s; animation-delay: 4.5s; }
+.snow .flake:nth-child(10n+10) { left: 95%; width: 5px; height: 5px; animation-duration: 14s; animation-delay: 1.5s; }
+
+/* ============================================
+   STURM - Schwerer Regen + Blitze
+   ============================================ */
+.storm .storm-drop {
+  position: absolute;
+  bottom: 100%;
+  width: 2px;
+  height: 0;
+  pointer-events: none;
+  background: linear-gradient(to bottom, 
+    rgba(255, 255, 255, 0) 0%, 
+    rgba(150, 170, 200, 0.7) 20%, 
+    rgba(150, 170, 200, 0.4) 100%
+  );
+  animation: storm-rain linear infinite;
+  opacity: 0;
+}
+
+@keyframes storm-rain {
+  0% {
+    transform: translateY(0vh) translateX(0);
+    opacity: 0;
+    height: 0;
+  }
+  8% {
+    opacity: 0.8;
+    height: 100px;
+  }
+  92% {
+    opacity: 0.5;
+    height: 100px;
+  }
+  100% {
+    transform: translateY(110vh) translateX(20px);
+    opacity: 0;
+    height: 0;
+  }
+}
+
+.storm .storm-drop:nth-child(20n+1) { left: 2%; animation-duration: 0.5s; animation-delay: 0s; }
+.storm .storm-drop:nth-child(20n+2) { left: 7%; animation-duration: 0.45s; animation-delay: 0.05s; }
+.storm .storm-drop:nth-child(20n+3) { left: 12%; animation-duration: 0.55s; animation-delay: 0.1s; }
+.storm .storm-drop:nth-child(20n+4) { left: 17%; animation-duration: 0.48s; animation-delay: 0.03s; }
+.storm .storm-drop:nth-child(20n+5) { left: 22%; animation-duration: 0.52s; animation-delay: 0.08s; }
+.storm .storm-drop:nth-child(20n+6) { left: 27%; animation-duration: 0.47s; animation-delay: 0.12s; }
+.storm .storm-drop:nth-child(20n+7) { left: 32%; animation-duration: 0.53s; animation-delay: 0.06s; }
+.storm .storm-drop:nth-child(20n+8) { left: 37%; animation-duration: 0.49s; animation-delay: 0.11s; }
+.storm .storm-drop:nth-child(20n+9) { left: 42%; animation-duration: 0.51s; animation-delay: 0.04s; }
+.storm .storm-drop:nth-child(20n+10) { left: 47%; animation-duration: 0.54s; animation-delay: 0.09s; }
+.storm .storm-drop:nth-child(20n+11) { left: 52%; animation-duration: 0.48s; animation-delay: 0.07s; }
+.storm .storm-drop:nth-child(20n+12) { left: 57%; animation-duration: 0.52s; animation-delay: 0.02s; }
+.storm .storm-drop:nth-child(20n+13) { left: 62%; animation-duration: 0.5s; animation-delay: 0.13s; }
+.storm .storm-drop:nth-child(20n+14) { left: 67%; animation-duration: 0.46s; animation-delay: 0.05s; }
+.storm .storm-drop:nth-child(20n+15) { left: 72%; animation-duration: 0.53s; animation-delay: 0.1s; }
+.storm .storm-drop:nth-child(20n+16) { left: 77%; animation-duration: 0.49s; animation-delay: 0.08s; }
+.storm .storm-drop:nth-child(20n+17) { left: 82%; animation-duration: 0.51s; animation-delay: 0.03s; }
+.storm .storm-drop:nth-child(20n+18) { left: 87%; animation-duration: 0.47s; animation-delay: 0.11s; }
+.storm .storm-drop:nth-child(20n+19) { left: 92%; animation-duration: 0.54s; animation-delay: 0.06s; }
+.storm .storm-drop:nth-child(20n+20) { left: 97%; animation-duration: 0.5s; animation-delay: 0.09s; }
+
+/* Blitz-Effekt */
+.lightning-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.lightning {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0);
+  animation: lightning-flash 8s infinite;
+}
+
+@keyframes lightning-flash {
+  0%, 100% { background: rgba(255, 255, 255, 0); }
+  49%, 51% { background: rgba(255, 255, 255, 0); }
+  50% { background: rgba(200, 220, 255, 0.4); }
+  50.1% { background: rgba(255, 255, 255, 0); }
+  50.2% { background: rgba(200, 220, 255, 0.6); }
+}
+
+/* ============================================
+   SONNIG - Subtile Lichtstrahlen & Partikel
+   ============================================ */
+.sunny-effect {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.sunrays {
+  position: absolute;
+  top: -50%;
+  left: 50%;
+  width: 200%;
+  height: 200%;
+  transform: translateX(-50%);
+  background: radial-gradient(
+    ellipse at center top,
+    rgba(255, 230, 150, 0.08) 0%,
+    rgba(255, 240, 180, 0.04) 30%,
+    transparent 70%
+  );
+  animation: subtle-pulse 8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes subtle-pulse {
+  0%, 100% { opacity: 0.6; transform: translateX(-50%) scale(1); }
+  50% { opacity: 0.8; transform: translateX(-50%) scale(1.05); }
+}
+
+.dust-particles .particle {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: float-particle linear infinite;
+  opacity: 0;
+}
+
+@keyframes float-particle {
+  0% {
+    transform: translateY(110vh) translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.6;
+  }
+  90% {
+    opacity: 0.3;
+  }
+  100% {
+    transform: translateY(-10vh) translateX(30px) rotate(180deg);
+    opacity: 0;
+  }
+}
+
+.dust-particles .particle:nth-child(5n+1) { left: 15%; animation-duration: 25s; animation-delay: 0s; }
+.dust-particles .particle:nth-child(5n+2) { left: 35%; animation-duration: 30s; animation-delay: 5s; width: 3px; height: 3px; }
+.dust-particles .particle:nth-child(5n+3) { left: 55%; animation-duration: 28s; animation-delay: 10s; }
+.dust-particles .particle:nth-child(5n+4) { left: 75%; animation-duration: 32s; animation-delay: 3s; width: 2.5px; height: 2.5px; }
+.dust-particles .particle:nth-child(5n+5) { left: 90%; animation-duration: 27s; animation-delay: 8s; }
+
+/* ============================================
+   BEWÖLKT - Minimale Dunst-Partikel
+   ============================================ */
+.cloudy-effect {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.mist-particles .mist {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  background: radial-gradient(
+    circle,
+    rgba(200, 210, 220, 0.15) 0%,
+    transparent 70%
+  );
+  border-radius: 50%;
+  pointer-events: none;
+  animation: drift-mist linear infinite;
+  opacity: 0;
+}
+
+@keyframes drift-mist {
+  0% {
+    transform: translateY(110vh) translateX(0);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.5;
+  }
+  80% {
+    opacity: 0.3;
+  }
+  100% {
+    transform: translateY(-20vh) translateX(100px);
+    opacity: 0;
+  }
+}
+
+.mist-particles .mist:nth-child(3n+1) { left: 20%; animation-duration: 45s; animation-delay: 0s; }
+.mist-particles .mist:nth-child(3n+2) { left: 50%; animation-duration: 50s; animation-delay: 15s; width: 80px; height: 80px; }
+.mist-particles .mist:nth-child(3n+3) { left: 80%; animation-duration: 48s; animation-delay: 30s; width: 70px; height: 70px; }
