@@ -10,14 +10,12 @@
     "lint": "tsc --noEmit"
   },
   "dependencies": {
-    "@tailwindcss/vite": "^4.0.0-alpha.20",
-    "framer-motion": "^11.2.12",
+    "framer-motion": "11.2.12",
+    "react-router-dom": "6.24.1",
+    "uuid": "10.0.0",
     "lucide-react": "0.400.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-router-dom": "^6.24.1",
-    "tailwindcss": "^4.0.0-alpha.20",
-    "uuid": "10.0.0"
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
   },
   "devDependencies": {
     "@types/node": "^22.14.0",

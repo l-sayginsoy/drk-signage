@@ -1,5 +1,5 @@
 
-import { type FC } from 'react';
+import * as React from 'react';
 import { Sun, Cloud, CloudRain, CloudFog, Zap, Snowflake } from 'lucide-react';
 import { WeatherData, WeatherType } from '../types';
 
@@ -66,7 +66,7 @@ const getWeatherIcon = (type: WeatherType, sizeClass: string) => {
   }
 };
 
-const WeatherForecastWidget: FC<WeatherForecastWidgetProps> = ({ weather, layout = 'horizontal', mode = 'dark' }) => {
+const WeatherForecastWidget: React.FC<WeatherForecastWidgetProps> = ({ weather, layout = 'horizontal', mode = 'dark' }) => {
   const isVertical = layout === 'vertical';
   const textColor = mode === 'light' ? 'text-white' : 'text-[#34495e]';
   const dividerColor = mode === 'light' ? 'bg-white' : 'bg-[#34495e]';

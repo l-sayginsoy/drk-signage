@@ -1,5 +1,5 @@
 
-import { type FC } from 'react';
+import React from 'react';
 import { useTime } from '../hooks/useTime';
 import { WeeklyScheduleData, Event } from '../types';
 import { Clock } from 'lucide-react';
@@ -10,7 +10,7 @@ interface UpcomingEventsProps {
 
 const dayNames = ['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag'];
 
-const UpcomingEvents: FC<UpcomingEventsProps> = ({ weeklySchedule }) => {
+const UpcomingEvents: React.FC<UpcomingEventsProps> = ({ weeklySchedule }) => {
     const { calendarWeek, dayOfWeekIndex, now, getShortDate } = useTime();
 
     const getEventForDay = (dayIndex: number): Event | null => {
@@ -44,7 +44,7 @@ const UpcomingEvents: FC<UpcomingEventsProps> = ({ weeklySchedule }) => {
     const tomorrowDayName = tomorrowDate.toLocaleDateString('de-DE', { weekday: 'long' });
     const tomorrowShortDate = getShortDate(tomorrowDate);
 
-    const EventCard: FC<{title: string, dateString: string, shortDate: string, event: Event | null, isToday: boolean}> = ({ title, dateString, shortDate, event, isToday }) => {
+    const EventCard: React.FC<{title: string, dateString: string, shortDate: string, event: Event | null, isToday: boolean}> = ({ title, dateString, shortDate, event, isToday }) => {
         const cardClasses = isToday 
             ? "bg-red-600 text-white" 
             : "bg-white text-gray-800";

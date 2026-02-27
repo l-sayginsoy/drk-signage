@@ -1,6 +1,6 @@
-import { type FC } from 'react';
+import React from 'react';
 
-const DrkLogo: FC = () => {
+const DrkLogo: React.FC = () => {
   return null;
 };
 

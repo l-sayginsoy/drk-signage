@@ -1,4 +1,4 @@
-import { type FC } from 'react';
+import React from 'react';
 import { WeatherType } from '../types';
 import './WeatherEffect.css';
 
@@ -6,7 +6,7 @@ interface WeatherEffectProps {
   weatherType: WeatherType;
 }
 
-const WeatherEffect: FC<WeatherEffectProps> = ({ weatherType }) => {
+const WeatherEffect: React.FC<WeatherEffectProps> = ({ weatherType }) => {
   const renderEffect = () => {
     switch (weatherType) {
       case 'rainy':

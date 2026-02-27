@@ -1,5 +1,5 @@
 
-import { useState, type FC, type Dispatch, type SetStateAction } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AppData } from '../../types';
 import WeeklyScheduleEditor from './WeeklyScheduleEditor';
@@ -12,12 +12,12 @@ import { LayoutDashboard, Calendar, Utensils, Image as ImageIcon, AlertCircle, C
 
 interface AdminPanelProps {
   appData: AppData;
-  setAppData: Dispatch<SetStateAction<AppData>>;
+  setAppData: React.Dispatch<React.SetStateAction<AppData>>;
 }
 
 type Tab = 'dashboard' | 'schedule' | 'meals' | 'slideshow' | 'urgent' | 'residents' | 'settings';
 
-const AdminPanel: FC<AdminPanelProps> = ({ appData, setAppData }) => {
+const AdminPanel: React.FC<AdminPanelProps> = ({ appData, setAppData }) => {
     const [activeTab, setActiveTab] = useState<Tab>('dashboard');
 
     const SidebarItem = ({ id, label, icon: Icon }: { id: Tab, label: string, icon: any }) => (

@@ -1,18 +1,18 @@
 
-import { useRef, type FC, type Dispatch, type SetStateAction, type ChangeEvent } from 'react';
+import React, { useRef } from 'react';
 import { AppData } from '../../types';
 import { Upload, Clock, AlertCircle, X, Megaphone } from 'lucide-react';
 import { processImageFile } from '../../utils/fileUtils';
 
 interface UrgentEditorProps {
   appData: AppData;
-  setAppData: Dispatch<SetStateAction<AppData>>;
+  setAppData: React.Dispatch<React.SetStateAction<AppData>>;
 }
 
-const UrgentEditor: FC<UrgentEditorProps> = ({ appData, setAppData }) => {
+const UrgentEditor: React.FC<UrgentEditorProps> = ({ appData, setAppData }) => {
     const fileInputRef = useRef<HTMLInputElement>(null);
 
-    const handleUrgentMessageChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const handleUrgentMessageChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value, type } = e.target;
         const isCheckbox = type === 'checkbox';
         const updatedValue = isCheckbox ? (e.target as HTMLInputElement).checked : value;
@@ -23,7 +23,7 @@ const UrgentEditor: FC<UrgentEditorProps> = ({ appData, setAppData }) => {
         });
     };
 
-    const handleUrgentImageUpload = async (e: ChangeEvent<HTMLInputElement>) => {
+    const handleUrgentImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files[0]) {
             try {
                 const base64 = await processImageFile(e.target.files[0]);

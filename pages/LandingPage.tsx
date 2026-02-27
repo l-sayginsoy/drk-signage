@@ -1,11 +1,11 @@
 
-import { useEffect, type FC } from 'react';
+import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const LandingPage: FC = () => {
+const LandingPage: React.FC = () => {
   const navigate = useNavigate();
 
-  useEffect(() => {
+  React.useEffect(() => {
     const timer = setTimeout(() => {
       navigate('/display');
     }, 10000); // 10 seconds

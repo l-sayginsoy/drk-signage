@@ -71,6 +71,10 @@ export const ContentContainer: React.FC<ContentContainerProps> = ({
     let imageElement = null;
 
     if (useFallback) {
+        finalStyle.backgroundImage = "url('/assets/drk-logo.png')";
+        finalStyle.backgroundSize = "30%"; // Moderate size, don't fill screen
+        finalStyle.backgroundRepeat = "no-repeat";
+        finalStyle.backgroundPosition = "center";
         finalStyle.backgroundColor = "#f3f4f6"; // Light gray background
     } else if (imageStatus === 'loaded') {
         if (mode === 'contain') {

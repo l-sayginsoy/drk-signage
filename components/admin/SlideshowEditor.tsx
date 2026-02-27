@@ -1,5 +1,5 @@
 
-import { useState, type FC, type Dispatch, type SetStateAction, type ChangeEvent } from 'react';
+import React, { useState } from 'react';
 import { AppData, SlideshowImage } from '../../types';
 import { v4 as uuidv4 } from 'uuid';
 import { Trash2, ImageIcon, Loader2, Plus, Clock, PlayCircle, CheckSquare, Square, X } from 'lucide-react';
@@ -7,15 +7,15 @@ import { processImageFile } from '../../utils/fileUtils';
 
 interface SlideshowEditorProps {
   appData: AppData;
-  setAppData: Dispatch<SetStateAction<AppData>>;
+  setAppData: React.Dispatch<React.SetStateAction<AppData>>;
 }
 
-const SlideshowEditor: FC<SlideshowEditorProps> = ({ appData, setAppData }) => {
+const SlideshowEditor: React.FC<SlideshowEditorProps> = ({ appData, setAppData }) => {
     const [newSlideCaption, setNewSlideCaption] = useState('');
     const [isProcessing, setIsProcessing] = useState(false);
     const [selectedIds, setSelectedIds] = useState<string[]>([]);
 
-    const handleConfigChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const handleConfigChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value, type } = e.target;
         let updatedValue: any = type === 'checkbox' ? (e.target as HTMLInputElement).checked : value;
         if (name === 'durationPerSlide') updatedValue = parseInt(value, 10) || 10;
@@ -26,7 +26,7 @@ const SlideshowEditor: FC<SlideshowEditorProps> = ({ appData, setAppData }) => {
         }));
     };
 
-    const handleAddSlide = async (e: ChangeEvent<HTMLInputElement>) => {
+    const handleAddSlide = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const files = e.target.files;
         if (!files || files.length === 0) return;
 

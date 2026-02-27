@@ -1,5 +1,5 @@
 
-import { useState, useEffect, type FC } from 'react';
+import React, { useState, useEffect } from 'react';
 import { SlideshowImage } from '../types';
 import { ContentContainer } from './FocusView';
 
@@ -7,7 +7,7 @@ interface SlideshowProps {
   images: SlideshowImage[];
 }
 
-const Slideshow: FC<SlideshowProps> = ({ images }) => {
+const Slideshow: React.FC<SlideshowProps> = ({ images }) => {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {

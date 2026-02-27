@@ -1,5 +1,5 @@
 
-import { type FC } from 'react';
+import React from 'react';
 import { useTime } from '../hooks/useTime';
 import { WeeklyScheduleData, Event } from '../types';
 
@@ -9,7 +9,7 @@ interface WeeklyScheduleProps {
 
 const dayNames = ['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag'];
 
-const WeeklySchedule: FC<WeeklyScheduleProps> = ({ weeklySchedule }) => {
+const WeeklySchedule: React.FC<WeeklyScheduleProps> = ({ weeklySchedule }) => {
   const { calendarWeek, dayOfWeekIndex, getShortDate, now } = useTime();
   
   const currentWeekSchedule = weeklySchedule[calendarWeek] || [];

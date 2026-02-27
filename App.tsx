@@ -1,5 +1,5 @@
 
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { HashRouter, Routes, Route } from 'react-router-dom';
 import Dashboard from './components/Dashboard';
 import AdminPanel from './components/admin/AdminPanel';
@@ -50,7 +50,7 @@ function loadState(): AppData {
   return initialData;
 }
 
-function App() {
+const App: React.FC = () => {
   const [appData, setAppData] = useState<AppData>(() => loadState());
 
   useEffect(() => {
@@ -75,6 +75,6 @@ function App() {
       </HashRouter>
     </div>
   );
-}
+};
 
 export default App;

@@ -1,11 +1,11 @@
 
-import { useState, useRef, type FC, type Dispatch, type SetStateAction, type FormEvent, type ChangeEvent } from 'react';
+import React, { useRef, useState } from 'react';
 import { AppData, AppTheme } from '../../types';
 import { Download, Upload, AlertTriangle, CheckCircle2, Settings, Palette, HardDriveDownload, Database, Trash2, Plus } from 'lucide-react';
 
 interface DataManagementProps {
   appData: AppData;
-  setAppData: Dispatch<SetStateAction<AppData>>;
+  setAppData: React.Dispatch<React.SetStateAction<AppData>>;
 }
 
 const ListManager = ({ 
@@ -23,7 +23,7 @@ const ListManager = ({
 }) => {
     const [newValue, setNewValue] = useState('');
 
-    const handleAdd = (e: FormEvent) => {
+    const handleAdd = (e: React.FormEvent) => {
         e.preventDefault();
         if (newValue.trim()) {
             onAdd(newValue.trim());
@@ -75,7 +75,7 @@ const ListManager = ({
     );
 };
 
-const DataManagement: FC<DataManagementProps> = ({ appData, setAppData }) => {
+const DataManagement: React.FC<DataManagementProps> = ({ appData, setAppData }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [importStatus, setImportStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [statusMessage, setStatusMessage] = useState('');
@@ -96,7 +96,7 @@ const DataManagement: FC<DataManagementProps> = ({ appData, setAppData }) => {
 
   const handleImportClick = () => fileInputRef.current?.click();
 
-  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;
 
@@ -119,7 +119,7 @@ const DataManagement: FC<DataManagementProps> = ({ appData, setAppData }) => {
     event.target.value = '';
   };
 
-  const handleThemeChange = (e: ChangeEvent<HTMLSelectElement>) => {
+  const handleThemeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
       setAppData(prev => ({ ...prev, currentTheme: e.target.value as AppTheme }));
   };
 

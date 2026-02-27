@@ -1,5 +1,5 @@
 
-import { useState, useEffect, useRef, type FC, type Dispatch, type SetStateAction } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { AppData, Event, DaySchedule } from '../../types';
 import { getCalendarWeek } from '../../utils/dateUtils';
 import { v4 as uuidv4 } from 'uuid';
@@ -7,7 +7,7 @@ import { Trash2, ChevronLeft, ChevronRight, Clock, CalendarDays, Plus } from 'lu
 
 interface WeeklyScheduleEditorProps {
   appData: AppData;
-  setAppData: Dispatch<SetStateAction<AppData>>;
+  setAppData: React.Dispatch<React.SetStateAction<AppData>>;
 }
 
 // Custom Combobox Component (Hybrid Select/Input)
@@ -18,7 +18,7 @@ interface ComboboxProps {
     placeholder?: string;
 }
 
-const Combobox: FC<ComboboxProps> = ({ value, onChange, options, placeholder }) => {
+const Combobox: React.FC<ComboboxProps> = ({ value, onChange, options, placeholder }) => {
     const [isOpen, setIsOpen] = useState(false);
     const containerRef = useRef<HTMLDivElement>(null);
 
@@ -81,7 +81,7 @@ const Combobox: FC<ComboboxProps> = ({ value, onChange, options, placeholder }) 
 const dayNames = ['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag'];
 const emptyWeek: DaySchedule[] = dayNames.map(day => ({ day, events: [] }));
 
-const WeeklyScheduleEditor: FC<WeeklyScheduleEditorProps> = ({ appData, setAppData }) => {
+const WeeklyScheduleEditor: React.FC<WeeklyScheduleEditorProps> = ({ appData, setAppData }) => {
     const [currentWeek, setCurrentWeek] = useState(getCalendarWeek(new Date()));
     
     const handleWeekChange = (direction: 'prev' | 'next') => {

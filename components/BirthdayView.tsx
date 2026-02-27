@@ -1,5 +1,5 @@
 
-import { type FC } from 'react';
+import * as React from 'react';
 import { motion } from 'framer-motion';
 import { Cake } from 'lucide-react';
 import { Resident } from '../types';
@@ -8,7 +8,7 @@ interface BirthdayViewProps {
   residents: Resident[];
 }
 
-const BirthdayView: FC<BirthdayViewProps> = ({ residents }) => {
+const BirthdayView: React.FC<BirthdayViewProps> = ({ residents }) => {
   // We assume only one or two residents have birthday, we show the first one or map them
   // For simplicity in this layout, we take the first one. 
   // If multiple people have birthdays, one could cycle through them or list them.
