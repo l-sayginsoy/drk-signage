@@ -1,5 +1,5 @@
 
-import * as React from 'react';
+import React, { type FC, type CSSProperties } from 'react';
 import { AppTheme } from '../types';
 
 interface ThemeOverlayProps {
@@ -49,13 +49,13 @@ const getDecorations = (theme: AppTheme) => {
     }
 };
 
-const ThemeOverlay: React.FC<ThemeOverlayProps> = ({ theme }) => {
+const ThemeOverlay: FC<ThemeOverlayProps> = ({ theme }) => {
     const decor = getDecorations(theme);
     
     if (!decor) return null;
 
     // Common style for all corners
-    const baseStyle: React.CSSProperties = {
+    const baseStyle: CSSProperties = {
         position: 'absolute',
         // Reduced size slightly to be less obtrusive
         fontSize: 'clamp(2.5rem, 5vmin, 4rem)', 

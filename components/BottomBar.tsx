@@ -1,5 +1,5 @@
 
-import React from 'react';
+import { type FC } from 'react';
 import WeatherForecastWidget from './WeatherWidget';
 import { WeatherData } from '../types';
 
@@ -8,7 +8,7 @@ interface BottomBarProps {
   quote: string;
 }
 
-const BottomBar: React.FC<BottomBarProps> = ({ weather, quote }) => {
+const BottomBar: FC<BottomBarProps> = ({ weather, quote }) => {
   return (
     <div className="w-full grid grid-cols-[1fr_auto_1fr] items-center px-[3.5vmin] bg-white text-black h-[10vmin] min-h-[60px] max-h-[100px]">
       <div className="flex justify-start">

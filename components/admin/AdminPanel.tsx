@@ -23,37 +23,32 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ appData, setAppData }) => {
     const SidebarItem = ({ id, label, icon: Icon }: { id: Tab, label: string, icon: any }) => (
         <button
             onClick={() => setActiveTab(id)}
-            className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg transition-all duration-200 ${
+            className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg transition-all duration-200 group ${
                 activeTab === id 
-                ? 'bg-blue-600 text-white shadow-md' 
-                : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
+                ? 'bg-blue-600 text-white shadow-lg shadow-blue-900/50' 
+                : 'text-slate-400 hover:bg-slate-800 hover:text-white'
             }`}
         >
-            <Icon size={20} />
+            <Icon size={20} className={activeTab === id ? 'text-white' : 'text-slate-500 group-hover:text-white transition-colors'} />
             <span className="font-medium">{label}</span>
         </button>
     );
 
     return (
-        <div className="min-h-screen bg-gray-100 font-sans flex flex-col">
-             {/* Header */}
-             <div className="flex-shrink-0 bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm h-16">
-                <div className="max-w-[1920px] mx-auto px-6 h-full flex items-center justify-between">
-                     <div className="flex items-center space-x-4">
-                         <img src="/assets/drk-logo.png" alt="DRK Logo" className="h-10 w-auto object-contain"/>
-                         <h1 className="text-xl font-bold text-gray-800 border-l pl-4 border-gray-300">Admin-Bereich</h1>
-                     </div>
-                     <Link to="/display" className="px-5 py-2 bg-gray-100 border border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-200 transition-colors text-sm">
-                        Zur Anzeige
-                    </Link>
+        <div className="flex h-screen bg-gray-50 font-sans overflow-hidden">
+            {/* Sidebar Navigation - Full Height */}
+            <aside className="w-72 bg-slate-900 text-white flex flex-col flex-shrink-0 shadow-xl z-20">
+                <div className="h-16 flex items-center px-6 border-b border-slate-800 bg-slate-950">
+                    <div className="flex items-center space-x-3">
+                        <div className="bg-white p-1.5 rounded-lg">
+                            <img src="/assets/drk-logo.png" alt="DRK" className="h-6 w-auto object-contain"/>
+                        </div>
+                        <span className="font-bold text-lg tracking-tight">Admin-Bereich</span>
+                    </div>
                 </div>
-            </div>
 
-            <div className="flex flex-1 max-w-[1920px] w-full mx-auto p-6 gap-6">
-                
-                {/* Sidebar Navigation */}
-                <aside className="w-64 flex-shrink-0 flex flex-col space-y-2 bg-white rounded-xl shadow-sm p-4 h-fit sticky top-24 border border-gray-100">
-                    <div className="pb-2 pl-4 text-xs font-bold text-gray-400 uppercase tracking-wider">Menü</div>
+                <div className="flex-1 overflow-y-auto py-6 px-4 space-y-1 custom-scrollbar">
+                    <div className="px-2 mb-2 text-xs font-bold text-slate-500 uppercase tracking-wider">Hauptmenü</div>
                     
                     <SidebarItem id="dashboard" label="Übersicht" icon={LayoutDashboard} />
                     <SidebarItem id="schedule" label="Wochenplan" icon={Calendar} />
@@ -62,38 +57,74 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ appData, setAppData }) => {
                     <SidebarItem id="slideshow" label="Diashow" icon={ImageIcon} />
                     <SidebarItem id="urgent" label="Eilmeldung" icon={AlertCircle} />
                     
-                    <div className="py-2 border-t border-gray-100 my-2"></div>
+                    <div className="my-4 border-t border-slate-800"></div>
+                    <div className="px-2 mb-2 text-xs font-bold text-slate-500 uppercase tracking-wider">System</div>
                     <SidebarItem id="settings" label="Daten & Backup" icon={Settings} />
-                </aside>
+                </div>
 
-                {/* Content Area - Added max-w-5xl to constrain width */}
-                <main className="flex-1 min-w-0">
-                    <div className="max-w-5xl w-full"> 
+                <div className="p-4 border-t border-slate-800 bg-slate-950">
+                    <Link to="/display" className="flex items-center justify-center w-full px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors font-medium shadow-lg shadow-blue-900/20">
+                        Zur Anzeige öffnen
+                    </Link>
+                </div>
+            </aside>
+
+            {/* Main Content Area */}
+            <main className="flex-1 flex flex-col min-w-0 overflow-hidden bg-gray-50/50">
+                {/* Top Header */}
+                <header className="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-8 shadow-sm z-10">
+                    <h2 className="text-xl font-bold text-gray-800">
+                        {activeTab === 'dashboard' && 'Dashboard Übersicht'}
+                        {activeTab === 'schedule' && 'Wochenplan verwalten'}
+                        {activeTab === 'meals' && 'Speiseplan & Mahlzeiten'}
+                        {activeTab === 'residents' && 'Bewohnerliste'}
+                        {activeTab === 'slideshow' && 'Medien & Diashow'}
+                        {activeTab === 'urgent' && 'Eilmeldung konfigurieren'}
+                        {activeTab === 'settings' && 'Einstellungen'}
+                    </h2>
+                    <div className="flex items-center gap-4">
+                        <div className="text-sm text-gray-500">Angemeldet als Administrator</div>
+                        <div className="h-8 w-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-bold border border-blue-200">A</div>
+                    </div>
+                </header>
+
+                {/* Scrollable Content */}
+                <div className="flex-1 overflow-y-auto p-8 custom-scrollbar">
+                    <div className="max-w-[1600px] mx-auto pb-10"> 
                         {activeTab === 'dashboard' && (
                             <div className="space-y-6 animate-fade-in">
                                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                                    <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-                                        <h3 className="text-gray-500 text-sm font-semibold uppercase mb-1">Status</h3>
-                                        <div className="text-2xl font-bold text-green-600">System bereit</div>
-                                        <p className="text-sm text-gray-400 mt-2">Alle Dienste laufen normal.</p>
-                                    </div>
-                                    <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-                                        <h3 className="text-gray-500 text-sm font-semibold uppercase mb-1">Aktive Eilmeldung</h3>
-                                        <div className={`text-2xl font-bold ${appData.urgentMessage.active ? 'text-red-600' : 'text-gray-400'}`}>
-                                            {appData.urgentMessage.active ? 'JA' : 'NEIN'}
+                                    <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                                        <div className="flex items-center justify-between mb-4">
+                                            <h3 className="text-gray-500 text-sm font-bold uppercase">System Status</h3>
+                                            <div className="h-2 w-2 rounded-full bg-green-500"></div>
                                         </div>
-                                        <p className="text-sm text-gray-400 mt-2">{appData.urgentMessage.active ? 'Wird aktuell angezeigt.' : 'Keine Meldung aktiv.'}</p>
+                                        <div className="text-3xl font-bold text-gray-800">Online</div>
+                                        <p className="text-sm text-gray-400 mt-2">Alle Dienste arbeiten normal.</p>
                                     </div>
-                                    <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-                                        <h3 className="text-gray-500 text-sm font-semibold uppercase mb-1">Diashow Bilder</h3>
-                                        <div className="text-2xl font-bold text-blue-600">{appData.slideshow.images.length}</div>
+                                    <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                                        <div className="flex items-center justify-between mb-4">
+                                            <h3 className="text-gray-500 text-sm font-bold uppercase">Eilmeldung</h3>
+                                            <div className={`h-2 w-2 rounded-full ${appData.urgentMessage.active ? 'bg-red-500 animate-pulse' : 'bg-gray-300'}`}></div>
+                                        </div>
+                                        <div className={`text-3xl font-bold ${appData.urgentMessage.active ? 'text-red-600' : 'text-gray-400'}`}>
+                                            {appData.urgentMessage.active ? 'Aktiv' : 'Inaktiv'}
+                                        </div>
+                                        <p className="text-sm text-gray-400 mt-2">{appData.urgentMessage.active ? 'Wird auf dem Display angezeigt.' : 'Keine Warnung aktiv.'}</p>
+                                    </div>
+                                    <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                                        <div className="flex items-center justify-between mb-4">
+                                            <h3 className="text-gray-500 text-sm font-bold uppercase">Diashow</h3>
+                                            <ImageIcon size={16} className="text-blue-500"/>
+                                        </div>
+                                        <div className="text-3xl font-bold text-blue-600">{appData.slideshow.images.length}</div>
                                         <p className="text-sm text-gray-400 mt-2">Bilder in der Rotation.</p>
                                     </div>
                                 </div>
                                 
-                                <div className="bg-blue-50 border border-blue-100 rounded-xl p-6">
-                                    <h2 className="text-xl font-bold text-blue-800 mb-2">Willkommen im neuen Admin-Bereich!</h2>
-                                    <p className="text-blue-700">Wählen Sie links im Menü den Bereich aus, den Sie bearbeiten möchten.</p>
+                                <div className="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl p-8 text-white shadow-lg">
+                                    <h2 className="text-2xl font-bold mb-2">Willkommen im Admin-Bereich</h2>
+                                    <p className="text-blue-100 max-w-2xl">Hier können Sie alle Inhalte des Dashboards steuern. Wählen Sie links im Menü den gewünschten Bereich aus. Änderungen werden sofort auf dem Display wirksam.</p>
                                 </div>
                             </div>
                         )}
@@ -105,8 +136,8 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ appData, setAppData }) => {
                         {activeTab === 'residents' && <ResidentsEditor appData={appData} setAppData={setAppData} />}
                         {activeTab === 'settings' && <DataManagement appData={appData} setAppData={setAppData} />}
                     </div>
-                </main>
-            </div>
+                </div>
+            </main>
         </div>
     );
 };

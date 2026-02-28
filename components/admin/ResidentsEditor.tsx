@@ -1,15 +1,15 @@
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, type FC, type Dispatch, type SetStateAction, type FormEvent } from 'react';
 import { AppData, Resident } from '../../types';
 import { v4 as uuidv4 } from 'uuid';
 import { Trash2, UserPlus, Cake, Calendar } from 'lucide-react';
 
 interface ResidentsEditorProps {
   appData: AppData;
-  setAppData: React.Dispatch<React.SetStateAction<AppData>>;
+  setAppData: Dispatch<SetStateAction<AppData>>;
 }
 
-const ResidentsEditor: React.FC<ResidentsEditorProps> = ({ appData, setAppData }) => {
+const ResidentsEditor: FC<ResidentsEditorProps> = ({ appData, setAppData }) => {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [day, setDay] = useState('');
@@ -23,7 +23,7 @@ const ResidentsEditor: React.FC<ResidentsEditorProps> = ({ appData, setAppData }
 
     const residents = appData.residents || [];
 
-    const handleAdd = (e: React.FormEvent) => {
+    const handleAdd = (e: FormEvent) => {
         e.preventDefault();
         if (!day || !month || !year) return;
 

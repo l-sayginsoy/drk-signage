@@ -1,5 +1,5 @@
 
-import React, { useEffect } from 'react';
+import React, { useEffect, type FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTime } from '../hooks/useTime';
 import { useWeather } from '../hooks/useWeather';
@@ -15,7 +15,7 @@ interface DashboardProps {
 
 const dayNames = ['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag'];
 
-const Dashboard: React.FC<DashboardProps> = ({ appData }) => {
+const Dashboard: FC<DashboardProps> = ({ appData }) => {
   const navigate = useNavigate();
   const { hour, minute, timeString, dateString, calendarWeek, dayOfWeekIndex, now, getShortDate, greeting } = useTime();
   const weather = useWeather();

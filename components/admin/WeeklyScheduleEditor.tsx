@@ -174,112 +174,121 @@ const WeeklyScheduleEditor: React.FC<WeeklyScheduleEditorProps> = ({ appData, se
     const inputClasses = "w-full h-[46px] px-3 bg-gray-50 border border-gray-200 rounded-lg focus:bg-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all outline-none text-gray-800 placeholder-gray-400 shadow-sm";
 
     return (
-        <section className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col min-h-[80vh] animate-fade-in">
-            {/* Header */}
-            <div className="flex justify-between items-center mb-8 sticky top-0 bg-white/95 backdrop-blur-sm z-20 py-4 border-b border-gray-100">
+        <section className="animate-fade-in">
+            {/* Header - Simplified as main layout has title */}
+            <div className="flex justify-between items-center mb-6 bg-white p-4 rounded-xl shadow-sm border border-gray-100">
                 <div className="flex items-center">
-                    <div className="bg-blue-100 p-3 rounded-xl mr-4 text-blue-600">
-                        <CalendarDays size={28} />
+                    <div className="bg-blue-100 p-2.5 rounded-lg mr-3 text-blue-600">
+                        <CalendarDays size={24} />
                     </div>
                     <div>
-                        <h2 className="text-2xl font-bold text-gray-800">Wochenprogramm</h2>
-                        <p className="text-sm text-gray-500">Planen Sie die Aktivitäten für die Woche</p>
+                        <h2 className="text-lg font-bold text-gray-800">Wochenprogramm</h2>
                     </div>
                 </div>
                 
-                <div className="flex items-center bg-gray-50 p-1.5 rounded-xl border border-gray-200 shadow-sm">
-                    <button onClick={() => handleWeekChange('prev')} className="p-2 rounded-lg hover:bg-white hover:shadow-sm text-gray-600 transition-all active:scale-95"><ChevronLeft size={20}/></button>
-                    <div className="text-center font-bold text-gray-800 w-32 select-none flex flex-col items-center leading-none justify-center">
-                        <span className="text-xs text-gray-400 uppercase tracking-wider">Kalenderwoche</span>
-                        <span className="text-xl">{currentWeek}</span>
+                <div className="flex items-center bg-gray-50 p-1 rounded-lg border border-gray-200">
+                    <button onClick={() => handleWeekChange('prev')} className="p-1.5 rounded-md hover:bg-white hover:shadow-sm text-gray-600 transition-all"><ChevronLeft size={18}/></button>
+                    <div className="px-4 text-center">
+                        <span className="text-[10px] text-gray-400 uppercase font-bold block">KW</span>
+                        <span className="text-lg font-bold text-gray-800 leading-none">{currentWeek}</span>
                     </div>
-                    <button onClick={() => handleWeekChange('next')} className="p-2 rounded-lg hover:bg-white hover:shadow-sm text-gray-600 transition-all active:scale-95"><ChevronRight size={20}/></button>
+                    <button onClick={() => handleWeekChange('next')} className="p-1.5 rounded-md hover:bg-white hover:shadow-sm text-gray-600 transition-all"><ChevronRight size={18}/></button>
                 </div>
             </div>
 
             {/* List */}
-            <div className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
-                {/* Rows */}
-                <div className="divide-y divide-gray-100">
-                    {dayNames.map((day, index) => {
-                        const dayData = weekData.find(d => d.day === day);
-                        const events = dayData?.events || [];
-                        const dateLabel = getDateForDay(index);
+            <div className="space-y-6">
+                {dayNames.map((day, index) => {
+                    const dayData = weekData.find(d => d.day === day);
+                    const events = dayData?.events || [];
+                    const dateLabel = getDateForDay(index);
 
-                        return (
-                            <div key={day} className="transition-colors hover:bg-gray-50/30">
-                                <div className="grid grid-cols-[180px_1fr] gap-8 px-8 py-6">
-                                    {/* Day Column */}
+                    return (
+                        <div key={day} className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+                            <div className="grid grid-cols-1 lg:grid-cols-[220px_1fr] gap-0 lg:gap-8">
+                                {/* Day Column - Header */}
+                                <div className="bg-gray-50 lg:bg-white p-6 lg:py-8 lg:pl-8 flex flex-row lg:flex-col items-center lg:items-start justify-between lg:justify-start border-b lg:border-b-0 lg:border-r border-gray-100">
                                     <div className="flex flex-col">
-                                        <div className="flex items-baseline gap-2">
-                                            <span className="font-bold text-gray-800 text-xl">{day}</span>
-                                            <span className="text-sm text-blue-600 font-bold">{dateLabel}</span>
+                                        <div className="flex items-baseline gap-3">
+                                            <span className="font-black text-gray-800 text-2xl tracking-tight">{day}</span>
                                         </div>
-                                        
-                                        <button 
-                                            onClick={() => handleAddEvent(day)}
-                                            className="mt-4 flex items-center gap-2 text-xs font-bold text-blue-600 hover:text-white hover:bg-blue-600 bg-blue-50 px-3 py-2 rounded-lg transition-all w-fit border border-blue-100"
-                                        >
-                                            <Plus size={14} />
-                                            Termin hinzufügen
-                                        </button>
+                                        <span className="text-sm font-bold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-md w-fit mt-1.5">{dateLabel}</span>
                                     </div>
+                                    
+                                    <button 
+                                        onClick={() => handleAddEvent(day)}
+                                        className="lg:mt-6 flex items-center gap-2 text-sm font-bold text-white bg-blue-600 hover:bg-blue-700 px-4 py-2.5 rounded-xl transition-all shadow-md shadow-blue-100 active:scale-95"
+                                    >
+                                        <Plus size={18} />
+                                        <span className="hidden lg:inline">Termin hinzufügen</span>
+                                        <span className="lg:hidden">Neu</span>
+                                    </button>
+                                </div>
 
-                                    {/* Events Column */}
-                                    <div className="space-y-4">
-                                        {events.length === 0 ? (
-                                            <div className="flex items-center justify-center h-[46px] border-2 border-dashed border-gray-200 rounded-lg text-gray-400 text-sm italic">
-                                                Keine Termine geplant
-                                            </div>
-                                        ) : (
-                                            events.map((event, eIdx) => (
-                                                <div key={event.id} className="grid grid-cols-[1fr_1fr_120px_50px] gap-4 items-center animate-slide-in">
-                                                    {/* Title Combobox */}
+                                {/* Events Column - Content */}
+                                <div className="p-6 lg:py-8 lg:pr-8 space-y-3">
+                                    {events.length === 0 ? (
+                                        <div className="flex flex-col items-center justify-center h-full py-8 border-2 border-dashed border-gray-100 rounded-xl text-gray-400">
+                                            <CalendarDays size={32} className="mb-2 opacity-20"/>
+                                            <span className="text-sm font-medium">Keine Termine geplant</span>
+                                        </div>
+                                    ) : (
+                                        events.map((event, eIdx) => (
+                                            <div key={event.id} className="group grid grid-cols-1 xl:grid-cols-[1.5fr_1.5fr_140px_auto] gap-4 items-center animate-slide-in p-4 bg-white rounded-xl border border-gray-200 shadow-sm hover:border-blue-300 hover:ring-1 hover:ring-blue-100 transition-all">
+                                                {/* Title Combobox */}
+                                                <div className="w-full">
+                                                    <label className="block xl:hidden text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">Veranstaltung</label>
                                                     <Combobox 
                                                         value={event.title}
                                                         onChange={(val) => handleDayChange(day, 'title', val, eIdx)}
                                                         options={appData.eventTitles || []}
-                                                        placeholder="Veranstaltung..."
+                                                        placeholder="Titel eingeben..."
                                                     />
+                                                </div>
 
-                                                    {/* Location Combobox */}
+                                                {/* Location Combobox */}
+                                                <div className="w-full">
+                                                    <label className="block xl:hidden text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">Ort</label>
                                                     <Combobox 
                                                         value={event.location}
                                                         onChange={(val) => handleDayChange(day, 'location', val, eIdx)}
                                                         options={appData.locations}
-                                                        placeholder="Ort..."
+                                                        placeholder="Ort wählen..."
                                                     />
+                                                </div>
 
-                                                    {/* Time Input */}
+                                                {/* Time Input */}
+                                                <div className="relative w-full">
+                                                    <label className="block xl:hidden text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">Uhrzeit</label>
                                                     <div className="relative">
                                                         <Clock className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" size={16} />
                                                         <input 
                                                             type="time" 
                                                             value={event.time} 
                                                             onChange={(e) => handleDayChange(day, 'time', e.target.value, eIdx)}
-                                                            className={`${inputClasses} pl-9 text-center`}
+                                                            className={`${inputClasses} pl-9 text-center font-mono font-medium`}
                                                         />
                                                     </div>
-
-                                                    {/* Delete Button */}
-                                                    <div className="flex justify-center">
-                                                        <button 
-                                                            onClick={() => handleDeleteEvent(day, event.id)}
-                                                            className="text-gray-300 hover:text-red-500 hover:bg-red-50 p-2 rounded-lg transition-all"
-                                                            title="Termin entfernen"
-                                                        >
-                                                            <Trash2 size={18} />
-                                                        </button>
-                                                    </div>
                                                 </div>
-                                            ))
-                                        )}
-                                    </div>
+
+                                                {/* Delete Button */}
+                                                <div className="flex justify-end xl:justify-center mt-2 xl:mt-0">
+                                                    <button 
+                                                        onClick={() => handleDeleteEvent(day, event.id)}
+                                                        className="text-gray-400 hover:text-red-600 hover:bg-red-50 p-2.5 rounded-lg transition-all opacity-100 xl:opacity-0 group-hover:opacity-100"
+                                                        title="Termin entfernen"
+                                                    >
+                                                        <Trash2 size={18} />
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        ))
+                                    )}
                                 </div>
                             </div>
-                        );
-                    })}
-                </div>
+                        </div>
+                    );
+                })}
             </div>
         </section>
     );

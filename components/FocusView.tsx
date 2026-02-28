@@ -32,14 +32,14 @@ interface ContentContainerProps {
     mode?: 'cover' | 'contain'; // New prop to control image scaling
 }
 
-export const ContentContainer: React.FC<ContentContainerProps> = ({ 
+export const ContentContainer = React.forwardRef<HTMLDivElement, ContentContainerProps>(({ 
     children, 
     imageUrl, 
     className = "", 
     style = {}, 
     showFallback = false,
     mode = 'cover'
-}) => {
+}, ref) => {
     const [imageStatus, setImageStatus] = useState<'loading' | 'loaded' | 'error' | 'empty'>('empty');
 
     useEffect(() => {
@@ -99,18 +99,21 @@ export const ContentContainer: React.FC<ContentContainerProps> = ({
 
     return (
         <motion.div
+          ref={ref}
           className={finalClassName}
           style={finalStyle}
-          initial={{ opacity: 0, scale: 1.02 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.98 }}
-          transition={{ duration: 0.8, ease: "easeInOut" }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 1.2, ease: "linear" }}
         >
           {imageElement}
           {children}
         </motion.div>
     );
-};
+});
+
+ContentContainer.displayName = 'ContentContainer';
 
 // --- Sub-components ---
 
@@ -299,8 +302,8 @@ const FocusView: React.FC<FocusViewProps> = ({ urgentMessage, meals, lunchMenu, 
   };
   
   return (
-    <div className="w-full h-full relative rounded-[18px] overflow-hidden shadow-inner bg-gray-200">
-        <AnimatePresence mode="wait">
+    <div className="w-full h-full relative rounded-[18px] overflow-hidden shadow-inner bg-black">
+        <AnimatePresence>
             {renderContent()}
         </AnimatePresence>
     </div>

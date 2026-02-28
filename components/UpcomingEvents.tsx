@@ -46,8 +46,8 @@ const UpcomingEvents: React.FC<UpcomingEventsProps> = ({ weeklySchedule }) => {
 
     const EventCard: React.FC<{title: string, dateString: string, shortDate: string, event: Event | null, isToday: boolean}> = ({ title, dateString, shortDate, event, isToday }) => {
         const cardClasses = isToday 
-            ? "bg-red-600 text-white" 
-            : "bg-white text-gray-800";
+            ? "bg-slate-800 text-white" 
+            : "bg-white text-slate-800";
         const dotClasses = isToday ? "bg-white" : "bg-gray-400";
         const timeIconClasses = isToday ? "text-white/90" : "text-gray-500";
         const locationTextClasses = isToday ? "text-white/90" : "text-gray-500";

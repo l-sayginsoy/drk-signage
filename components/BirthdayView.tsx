@@ -1,5 +1,5 @@
 
-import * as React from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { Cake } from 'lucide-react';
 import { Resident } from '../types';
@@ -30,9 +30,9 @@ const BirthdayView: React.FC<BirthdayViewProps> = ({ residents }) => {
       </div>
 
       <motion.div
-        initial={{ scale: 0.8, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ duration: 0.8, type: 'spring' }}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1.2, ease: "easeOut" }}
         className="z-10 bg-white/10 backdrop-blur-md border border-white/30 p-10 rounded-3xl shadow-2xl max-w-2xl w-full flex flex-col items-center"
       >
         <div className="bg-white text-purple-600 p-6 rounded-full mb-6 shadow-lg">

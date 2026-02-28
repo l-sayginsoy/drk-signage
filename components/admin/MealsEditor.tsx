@@ -1,12 +1,12 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState, type FC, type Dispatch, type SetStateAction, type ChangeEvent } from 'react';
 import { AppData } from '../../types';
 import { Upload, Utensils, Image as ImageIcon, Trash2, Clock, Calendar } from 'lucide-react';
 import { processImageFile } from '../../utils/fileUtils';
 
 interface MealsEditorProps {
   appData: AppData;
-  setAppData: React.Dispatch<React.SetStateAction<AppData>>;
+  setAppData: Dispatch<SetStateAction<AppData>>;
 }
 
 const dayNames = ['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag'];
@@ -20,7 +20,7 @@ const ImageUploader = ({
     label = "Upload"
 }: { 
     imageUrl: string, 
-    onUpload: (e: React.ChangeEvent<HTMLInputElement>) => void, 
+    onUpload: (e: ChangeEvent<HTMLInputElement>) => void, 
     onDelete: () => void,
     inputId: string,
     label?: string
@@ -76,7 +76,7 @@ const ImageUploader = ({
     );
 };
 
-const MealsEditor: React.FC<MealsEditorProps> = ({ appData, setAppData }) => {
+const MealsEditor: FC<MealsEditorProps> = ({ appData, setAppData }) => {
     
     const formatTimeObj = (time: { hour: number; minute: number }) => {
         return `${time.hour.toString().padStart(2, '0')}:${time.minute.toString().padStart(2, '0')}`;

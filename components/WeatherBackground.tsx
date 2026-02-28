@@ -1,5 +1,5 @@
 
-import React from 'react';
+import { type FC } from 'react';
 import { WeatherType } from '../types';
 import './WeatherBackground.css';
 
@@ -8,7 +8,7 @@ interface WeatherBackgroundProps {
   hour: number;
 }
 
-const WeatherBackground: React.FC<WeatherBackgroundProps> = ({ weatherType, hour }) => {
+const WeatherBackground: FC<WeatherBackgroundProps> = ({ weatherType, hour }) => {
   const timeOfDay = (hour >= 6 && hour < 20) ? 'day' : 'night';
   const backgroundClass = `weather-bg ${weatherType} ${timeOfDay}`;
 

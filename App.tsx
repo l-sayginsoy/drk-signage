@@ -1,5 +1,4 @@
-
-import React, { useState, useEffect } from 'react';
+import * as React from 'react';
 import { HashRouter, Routes, Route } from 'react-router-dom';
 import Dashboard from './components/Dashboard';
 import AdminPanel from './components/admin/AdminPanel';
@@ -50,10 +49,15 @@ function loadState(): AppData {
   return initialData;
 }
 
-const App: React.FC = () => {
-  const [appData, setAppData] = useState<AppData>(() => loadState());
+function App() {
+  const [appData, setAppData] = React.useState<AppData>(initialData);
 
-  useEffect(() => {
+  React.useEffect(() => {
+    const saved = loadState();
+    setAppData(saved);
+  }, []);
+
+  React.useEffect(() => {
     try {
       localStorage.setItem('drkMelmData', JSON.stringify(appData));
     } catch (error: any) {
@@ -75,6 +79,9 @@ const App: React.FC = () => {
       </HashRouter>
     </div>
   );
-};
+}
 
 export default App;
+
+
+

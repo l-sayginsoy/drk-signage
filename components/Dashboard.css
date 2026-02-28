@@ -377,12 +377,10 @@
   background: transparent;
 }
 
-/* Different colors for first and second event */
-.event-row:nth-child(1) .title { color: #1e40af; } /* Blue for first */
-.event-row:nth-child(2) .title { color: #991b1b; } /* Dark Red for second */
+/* Different colors for first and second event - REMOVED for cleaner look */
+.event-row .title { color: #1e293b; } /* Slate 800 */
 
-.item.today .event-row:nth-child(1) .title,
-.item.today .event-row:nth-child(2) .title {
+.item.today .event-row .title {
   color: #ffffff; /* White on today's background */
 }
 
@@ -396,7 +394,7 @@
 
 .item .title {
   font-size: 1.6vh;
-  font-weight: 800;
+  font-weight: 700;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -414,9 +412,9 @@
 }
 
 .item .time {
-  font-size: 1.8vh;
-  font-weight: 900;
-  color: #374151;
+  font-size: 1.7vh;
+  font-weight: 800;
+  color: #475569;
   text-align: right;
   flex-shrink: 0;
   min-width: 4.5vw;

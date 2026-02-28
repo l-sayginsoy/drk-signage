@@ -1,12 +1,12 @@
 
-import React from 'react';
+import { type FC } from 'react';
 
 interface ClockProps {
     timeString: string;
     dateString: string;
 }
 
-const Clock: React.FC<ClockProps> = ({ timeString, dateString }) => {
+const Clock: FC<ClockProps> = ({ timeString, dateString }) => {
     // Split "Dienstag, 10. Februar" into "Dienstag" and "10. Februar"
     const dateParts = dateString.split(',');
     const weekday = dateParts[0] || '';

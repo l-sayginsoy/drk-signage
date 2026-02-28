@@ -1,11 +1,11 @@
 
-import React, { useRef, useState } from 'react';
+import React, { useState, useRef, type FC, type Dispatch, type SetStateAction, type FormEvent, type ChangeEvent } from 'react';
 import { AppData, AppTheme } from '../../types';
 import { Download, Upload, AlertTriangle, CheckCircle2, Settings, Palette, HardDriveDownload, Database, Trash2, Plus } from 'lucide-react';
 
 interface DataManagementProps {
   appData: AppData;
-  setAppData: React.Dispatch<React.SetStateAction<AppData>>;
+  setAppData: Dispatch<SetStateAction<AppData>>;
 }
 
 const ListManager = ({ 
@@ -23,7 +23,7 @@ const ListManager = ({
 }) => {
     const [newValue, setNewValue] = useState('');
 
-    const handleAdd = (e: React.FormEvent) => {
+    const handleAdd = (e: FormEvent) => {
         e.preventDefault();
         if (newValue.trim()) {
             onAdd(newValue.trim());
@@ -75,7 +75,7 @@ const ListManager = ({
     );
 };
 
-const DataManagement: React.FC<DataManagementProps> = ({ appData, setAppData }) => {
+const DataManagement: FC<DataManagementProps> = ({ appData, setAppData }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [importStatus, setImportStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [statusMessage, setStatusMessage] = useState('');
@@ -96,7 +96,7 @@ const DataManagement: React.FC<DataManagementProps> = ({ appData, setAppData }) 
 
   const handleImportClick = () => fileInputRef.current?.click();
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;
 
@@ -119,7 +119,7 @@ const DataManagement: React.FC<DataManagementProps> = ({ appData, setAppData }) 
     event.target.value = '';
   };
 
-  const handleThemeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleThemeChange = (e: ChangeEvent<HTMLSelectElement>) => {
       setAppData(prev => ({ ...prev, currentTheme: e.target.value as AppTheme }));
   };
 
